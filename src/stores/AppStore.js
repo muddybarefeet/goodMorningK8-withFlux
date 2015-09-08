@@ -1,4 +1,3 @@
-'use strict';
 
 var AppDispatcher = require('../dispatchers/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
@@ -8,7 +7,9 @@ var merge = require('react/lib/merge');
 var CHANGE_EVENT = 'change';
 
 var _data = {
-  message: 'Data from Store'
+  numberLeft: 0,
+  numberMiddle: 0,
+  numberRight: 0
 };
 
 var AppStore = merge(EventEmitter.prototype, {
@@ -30,16 +31,21 @@ var AppStore = merge(EventEmitter.prototype, {
   }
 });
 
-AppDispatcher.register(function(payload){
+AppDispatcher.register( function (payload){ //'subscribes' to the dispatcher. Store wants to know if it does anything.
   var action = payload.action;
-  console.log('STORE DISPATCHER REGISTER', action);
 
   if(action.actionType === AppConstants.EXAMPLE_CONSTANT){
     var text = action.text + ' to Dispatcher to Store and back';
     _data.message = text;
+  } else if(action.actionType === "LEFT_SIDE_CLICK") {
+    _data.numberLeft+=1;
+  } else if(action.actionType === "MIDDLE_CLICK") {
+    _data.numberMiddle+=1;
+  } else if(action.actionType === "RIGHT_SIDE_CLICK") {
+    _data.numberRight+=1;
   }
 
-  AppStore.emitChange();
+  AppStore.emitChange();//emit change event once action recieved and the data updated
 
 });
 
