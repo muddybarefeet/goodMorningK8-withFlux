@@ -1,18 +1,7 @@
 
 var React = require('react');
 
-var AppStore = require('../stores/AppStore');
-var AppActions = require('../actions/AppActions');//execute file and then store it in the variable(importing code to use)
-var backgroundImage = require('./mainText/backGroundImage.jsx');
-var clock = require('./mainText/clock.jsx');
-var greet = require('./mainText/greeting.jsx');
-var name = require('./mainText/name.jsx');
-var nameButton = require('./nameButton.jsx');
 
-
-function getAppState(){
-  return AppStore.getData();
-}
 
 var APP = React.createClass({
   getInitialState: function(){//default state for comonent (from store)
@@ -48,22 +37,14 @@ var APP = React.createClass({
   },*/
   
   render: function(){
-    //put button on the screen again with the new state
     return (
+    
+       <div>
+        <button></button>
+       </div>
       
-      <div style={{marginTop:'300px', textAlign:'center'}}>
-         <backgroundImage></backgroundImage>
-         <clock></clock>
-         <greet></greet>
-         <name></name>
-      </div>
-
-      <div style={{position:'absolute', bottom:'0', left: '0'}}>
-        <nameButton></nameButton>
-      </div>
-
       );
   }
 });
 
-module.exports = APP;
+module.exports = nameButton;
