@@ -3,11 +3,11 @@ var React = require('react');
 
 var AppStore = require('../stores/AppStore');
 var AppActions = require('../actions/AppActions');//execute file and then store it in the variable(importing code to use)
-var backgroundImage = require('./mainText/backGroundImage.jsx');
+var backgroundImage = require('./backGroundImage.jsx');
 var clock = require('./mainText/clock.jsx');
 var greet = require('./mainText/greeting.jsx');
 var name = require('./mainText/name.jsx');
-var nameButton = require('./nameButton.jsx');
+var nameButton = require('./settingsBar/nameButton.jsx');
 
 
 function getAppState(){
@@ -34,32 +34,32 @@ var APP = React.createClass({
     //removes event listener from the app store when the component removed from the page
     AppStore.removeChangeListener(this._onChange);
   },
-/*
+
   handleClick: function(args){
 
-    if(args === 'buttonLeft') {
-      AppActions.leftSide(); //trigger action
-    } else if(args === 'buttonMiddle') {
-      AppActions.middle();
-    } else if(args === 'buttonRight') {
-      AppActions.rightSide();
-    }
+    if(args === 'nameButton') {
+      this.setState({
+        //set the state of the button to show a text area to put your name
+    });
+    } 
 
-  },*/
+  },
   
   render: function(){
     //put button on the screen again with the new state
     return (
       
-      <div style={{marginTop:'300px', textAlign:'center'}}>
-         <backgroundImage></backgroundImage>
-         <clock></clock>
-         <greet></greet>
-         <name></name>
-      </div>
+      <div>
 
-      <div style={{position:'absolute', bottom:'0', left: '0'}}>
-        <nameButton></nameButton>
+        <div style={{marginTop:'300px', textAlign:'center'}}>
+           <backgroundImage></backgroundImage>
+           <clock></clock>
+           <greet></greet>
+           <name></name>
+        </div>
+
+        <nameButton onClick={this.handleClick.bind(this,"nameButton")}></nameButton>
+
       </div>
 
       );

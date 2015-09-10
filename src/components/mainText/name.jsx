@@ -15,10 +15,10 @@ var Name = React.createClass({
     //set state will always trigger the render method
   },*/
 
-  componentDidMount: function(){
+/*  componentDidMount: function(){
     //add event change listener to app store. tell the store to invoke the onChange function when change occurs
     AppStore.addChangeListener(this._onChange);
-  },
+  },*/
 
 /*  componentWillUnmount: function(){
     //removes event listener from the app store when the component removed from the page
@@ -43,8 +43,8 @@ var Name = React.createClass({
       
       <div style={{
           fontFamily:'arial',
-          fontSize:'30px',
-          color:'orange',
+          fontSize:'50px',
+          color:'white',
           fontWeight:'bold'
         } }>{this.state.currentInput}</div>
       

@@ -46,8 +46,8 @@ var Clock = React.createClass({
     return (
       <div style={{
           fontFamily:'arial',
-          fontSize:'70px',
-          color:'orange',
+          fontSize:'100px',
+          color:'white',
           fontWeight:'bold'
         }}>{this.state.currentTime}</div>
       );

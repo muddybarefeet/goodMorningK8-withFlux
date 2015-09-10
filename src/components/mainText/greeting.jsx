@@ -19,7 +19,7 @@ var Greeting = React.createClass({
 
   getInitialState: function(){//default state for comonent (from store)
     return {
-      currentGreeting : null,
+      currentGreeting : this.mornOrArvo()
     };
   },
 
@@ -45,8 +45,8 @@ var Greeting = React.createClass({
     return (
         <div style={{
           fontFamily:'arial',
-          fontSize:'50px',
-          color:'orange',
+          fontSize:'60px',
+          color:'white',
           fontWeight:'bold'
         }}>{this.state.currentGreeting}</div>
       );
