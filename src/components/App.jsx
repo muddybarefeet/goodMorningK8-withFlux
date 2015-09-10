@@ -2,8 +2,12 @@
 var React = require('react');
 
 var AppStore = require('../stores/AppStore');
-var AppActions = require('../actions/AppActions');
-var redBox = require('./redBox.jsx');
+var AppActions = require('../actions/AppActions');//execute file and then store it in the variable(importing code to use)
+var backgroundImage = require('./backGroundImage.jsx');
+var clock = require('./mainText/clock.jsx');
+var greet = require('./mainText/greeting.jsx');
+var name = require('./mainText/name.jsx');
+var nameButton = require('./settingsBar/nameButton.jsx');
 
 
 function getAppState(){
@@ -33,28 +37,31 @@ var APP = React.createClass({
 
   handleClick: function(args){
 
-    if(args === 'buttonLeft') {
-      AppActions.leftSide(); //trigger action
-    } else if(args === 'buttonMiddle') {
-      AppActions.middle();
-    } else if(args === 'buttonRight') {
-      AppActions.rightSide();
-    }
+    if(args === 'nameButton') {
+      this.setState({
+        //set the state of the button to show a text area to put your name
+    });
+    } 
 
   },
   
   render: function(){
-    //var divStyle = {height: 10}; // rendered as "height:10px"
     //put button on the screen again with the new state
     return (
       
       <div>
-        <button onClick={this.handleClick.bind(this,'buttonLeft')}>{this.state.numberLeft}</button>
-        <button onClick={this.handleClick.bind(this,'buttonMiddle')}>{this.state.numberMiddle}</button>
-        <button onClick={this.handleClick.bind(this,'buttonRight')}>{this.state.numberRight}</button>
-         <redBox></redBox>
+
+        <div style={{marginTop:'300px', textAlign:'center'}}>
+           <backgroundImage></backgroundImage>
+           <clock></clock>
+           <greet></greet>
+           <name></name>
+        </div>
+
+        <nameButton onClick={this.handleClick.bind(this,"nameButton")}></nameButton>
+
       </div>
-      
+
       );
   }
 });
