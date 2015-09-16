@@ -43,12 +43,7 @@ var Greeting = React.createClass({
   render: function(){
     //put button on the screen again with the new state
     return (
-        <div style={{
-          fontFamily:'arial',
-          fontSize:'60px',
-          color:'white',
-          fontWeight:'bold'
-        }}>{this.state.currentGreeting}</div>
+        <div className="mainText greeting">{this.state.currentGreeting}</div>
       );
   }
 });

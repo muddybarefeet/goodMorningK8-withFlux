@@ -7,13 +7,25 @@ var merge = require('react/lib/merge');
 var CHANGE_EVENT = 'change';
 
 var _data = {
-  number:0
+  name: "____________",
+  messages: [],
+  location: [],
+  weather: []
 };
 
 var AppStore = merge(EventEmitter.prototype, {
   
   getData: function(){
     return _data;
+  },
+
+  init: function() {
+    if(localStorage.hasOwnProperty('name')) {
+      _data.name = localStorage.getItem('name'); //here I set data name prop to what is in local storage if there a name prop
+    }
+    /*if(localStorage.hasOwnProperty('location')) {
+      _data.location = localStorage.getItem('location');
+    }*/
   },
 
   emitChange: function(){
@@ -27,19 +39,28 @@ var AppStore = merge(EventEmitter.prototype, {
   removeChangeListener: function(callback){
     this.removeListener(CHANGE_EVENT, callback);
   }
+
 });
 
-AppDispatcher.register( function (payload){ //'subscribes' to the dispatcher. Store wants to know if it does anything.
-  var action = payload.action;
+AppDispatcher.register( function (payload){ //'subscribes' to the dispatcher. Store wants to know if it does anything. Payload 
+  var action = payload.action;//payload is the object of data coming from dispactcher //action is the object passed from the actions file
 
-  if(action.actionType === "NAME_BUTTON_CLICK") {
-    //show the bar needed
+  if(action.actionType === "INSERTED_NAME") {
+    localStorage.setItem('name', action.text);
+    _data.name = action.text;
   }
+  if(action.actionType === "NEW_MESSAGE") {
+    var name = action.author;
+    var text = action.data;
+    _data.messages.push([name,text]);
+  } /*if(action.actionType === "WEATHER") {
+    set temp and weather ID(store for images)
+  }*/
+
 
   AppStore.emitChange();//emit change event once action recieved and the data updated
 
 });
-
 
 
 module.exports = AppStore;

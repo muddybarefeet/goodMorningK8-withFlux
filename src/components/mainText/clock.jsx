@@ -44,12 +44,7 @@ var Clock = React.createClass({
   render: function(){
     //put button on the screen again with the new state
     return (
-      <div style={{
-          fontFamily:'arial',
-          fontSize:'100px',
-          color:'white',
-          fontWeight:'bold'
-        }}>{this.state.currentTime}</div>
+      <div className="mainText">{this.state.currentTime}</div>
       );
   }
 });

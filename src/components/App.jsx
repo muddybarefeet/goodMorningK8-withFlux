@@ -8,6 +8,8 @@ var clock = require('./mainText/clock.jsx');
 var greet = require('./mainText/greeting.jsx');
 var name = require('./mainText/name.jsx');
 var nameButton = require('./settingsBar/nameButton.jsx');
+var chatBar = require('./chatBar/mainChatArea.jsx');
+
 
 
 function getAppState(){
@@ -37,10 +39,10 @@ var APP = React.createClass({
 
   handleClick: function(args){
 
-    if(args === 'nameButton') {
+    if(args === 'nameButton' || args === 'chatButton') {
       this.setState({
-        //set the state of the button to show a text area to put your name
-    });
+        isSelected: true
+      });
     } 
 
   },
@@ -50,6 +52,8 @@ var APP = React.createClass({
     return (
       
       <div>
+
+        <chatBar onClick={this.handleClick.bind(this,"chatButton")}></chatBar>
 
         <div style={{marginTop:'300px', textAlign:'center'}}>
            <backgroundImage></backgroundImage>

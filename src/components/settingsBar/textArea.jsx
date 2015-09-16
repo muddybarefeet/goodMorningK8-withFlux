@@ -1,55 +1,41 @@
 //where I will make a bar for the user to put their name so it can go in the good morning part
 
 var React = require('react');
+var actions = require('../../actions/AppActions');
+var AppStore = require('../../stores/AppStore.js');
 
 
-var rightSideBar = React.createClass({
-  getInitialState: function() {
-        return {
-            isSelected: false
-        };
-    },
-
- /* _onChange: function(){
-  //set the new state of the component when triggered by the event listener in the store
-    this.setState(getAppState());
-    //set state will always trigger the render method
+var nameInput = React.createClass({
+    
+  getInitialState: function() { //set initial needs to be an object
+    return {
+      userInput: AppStore.getData().name
+    };
   },
-*/
-  /*componentDidMount: function(){
-    //add event change listener to app store. tell the store to invoke the onChange function when change occurs
-    AppStore.addChangeListener(this._onChange);
-  },*/
 
-  /*componentWillUnmount: function(){
-    //removes event listener from the app store when the component removed from the page
-    AppStore.removeChangeListener(this._onChange);
+
+  handleChange: function(e) { //e is the event itself
+    if(e.key === 'Enter'){
+      //send an action and update the stores
+      actions.nameEnter(this.state.userInput); //pass the state to the actions function nameChange when enter key hit.
+      //this.props.nameEnter(this.state.userInput); could do this, too! 
+    }else{
+      var inputNode = this.refs.myInput.getDOMNode();//this gets you a reference to the element that has the ref myInput
+      var value = inputNode.value;
+      this.setState({userInput: value});
+    }
+
   },
-*/
-/*  handleClick: function(args){
-
-    if(args === 'nameButton') {
-      this.setState({
-        //set the state of the button to show a text area to put your name
-    });
-    } 
-
-  },*/
   
   render: function(){
-    //put button on the screen again with the new state
     return (
-      
-      <div className="settingsBar">
-        <header>Settings</header>
-        <section>
-          <h3>Your Name</h3>
-          <textarea className="nameInput"></textarea>
-        </section>
-      </div>
+        <div >
+          <input ref="myInput" className="nameInputArea"
+            onKeyUp={this.handleChange}></input> 
+        </div>
+    )
+  }//onKeyPress not waiting for the key to have been release in this case meant that I was one letter behind!
 
-      );
-  }
 });
 
-module.exports = rightSideBar;
+module.exports = nameInput;

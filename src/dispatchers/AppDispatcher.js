@@ -16,6 +16,20 @@ var AppDispatcher = copyProperties(new Dispatcher(), {
       source: 'VIEW_ACTION',
       action: action
     });
+  },
+
+  handleFirebaseAction: function(action) {
+    this.dispatch({
+      source: 'FIREBASE_ACTION',
+      action: action
+    });
+  },
+
+  handleWeatherAction: function(action) {
+    this.dispatch({
+      source: 'WEATHER_ACTION',
+      action: action
+    });
   }
 
 });

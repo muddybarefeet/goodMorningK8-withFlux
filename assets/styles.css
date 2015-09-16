@@ -1,0 +1,124 @@
+.mainText, .settingsBar, .chatBar {
+  font-family: arial;
+  color: white;
+  overflow: hidden;
+}
+
+/*-----------------------*/
+/* MAIN TEXT AREA STYLES */
+/*-----------------------*/
+
+.mainText {
+  font-weight: bold;
+  font-size: 90px;
+}
+
+.greeting {
+  font-size: 60px;
+}
+
+/*-----------------------*/
+/*     SETTINGS BAR      */
+/*-----------------------*/
+
+.settingsBar {
+  height:100%;
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  width:300px;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.7);
+}
+
+.header {
+  border-bottom: 2px solid white;
+  padding-bottom: 5px;
+}
+
+.yourNameAsk {
+  font-size:19px;
+  margin-bottom: 0;
+}
+
+.fa-cogs {
+  color:white;
+  position:absolute;
+  bottom:20px;
+  left:0;
+  background-color:rgb(0,0,0);
+  background-color:rgba(0,0,0,0.7);
+  padding: 10px;
+  border-top-right-radius:20px;
+  border-bottom-right-radius:20px;
+}
+
+.fa-cogs:hover, .fa-comment-o:hover {
+  background-color:rgb(255,255,255);
+  background-color:rgba(255,255,255,0.7);
+  color: black;
+}
+
+.nameInputArea, .messageInput {
+  width:294px;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.6);
+  border: 2px solid black;
+  height: 25px;
+  outline: none;
+  font-size: 15px;
+  text-indent: 7px;
+  color: white;
+}
+
+/*-----------------------*/
+/*       CHAT BAR        */
+/*-----------------------*/
+
+.chatBar {
+  height:100%;
+  position:absolute;
+  top:0;
+  bottom:0;
+  right:0;
+  width:300px;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.7);
+}
+
+.yammerer {
+  margin-bottom: 10px;
+}
+
+.fa-comment-o {
+  color: white;
+  position:absolute;
+  top:0;
+  right:20px;
+  background-color:rgb(0,0,0);
+  background-color:rgba(0,0,0,0.7);
+  padding: 10px;
+  padding-top: 8px;
+  border-bottom-right-radius:20px;
+  border-bottom-left-radius:20px;
+}
+
+.messageInput {
+  position: absolute;
+  bottom: 0;
+  height: 100px;
+  padding-top: 9px;
+}
+
+.messagesRoll {
+  overflow: scroll;
+  list-style: none;
+  padding-left: 10px;
+}
+
+
+
+
+
+
