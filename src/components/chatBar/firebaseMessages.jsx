@@ -14,7 +14,6 @@ var firebaseMessages = React.createClass({
   getInitialState: function(){//default state for comonent (from store)
     return {
       messages: getAppState(),
-      windowWidth: window.innerWidth
     };
   },
 
@@ -34,9 +33,6 @@ var firebaseMessages = React.createClass({
     AppStore.removeChangeListener(this._onChange);
   },
 
-  handleResize: function(e) {
-    this.setState({windowWidth: window.innerWidth});
-  },
 
   render: function(){ //render functio 
   
@@ -49,7 +45,9 @@ var firebaseMessages = React.createClass({
     });
 
     return ( // render the messages in the ul 
-      <ul /*Current window width: {this.state.windowWidth} */className="messagesRoll" /*style={{height: this.props.componentHeight}}*/>{renderedMessages}</ul> 
+
+      <ul Current window width: className="messagesRoll" /*style={{height: this.props.componentHeight}}*/>{renderedMessages}</ul> 
+
     );
 
   }
