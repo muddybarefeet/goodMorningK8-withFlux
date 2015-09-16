@@ -18,11 +18,11 @@ var nameInput = React.createClass({
     if(e.key === 'Enter'){
       //send an action and update the stores
       actions.nameEnter(this.state.userInput); //pass the state to the actions function nameChange when enter key hit.
-      //this.props.nameEnter(this.state.userInput); could do this, too! 
     }else{
       var inputNode = this.refs.myInput.getDOMNode();//this gets you a reference to the element that has the ref myInput
       var value = inputNode.value;
       this.setState({userInput: value});
+
     }
 
   },

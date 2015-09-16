@@ -49,7 +49,7 @@ var firebaseMessages = React.createClass({
     });
 
     return ( // render the messages in the ul 
-      <ul Current window width: {this.state.windowWidth} className="messagesRoll" /*style={{height: this.props.componentHeight}}*/>{renderedMessages}</ul> 
+      <ul /*Current window width: {this.state.windowWidth} */className="messagesRoll" /*style={{height: this.props.componentHeight}}*/>{renderedMessages}</ul> 
     );
 
   }

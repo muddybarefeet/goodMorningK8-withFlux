@@ -41,8 +41,6 @@ var messageInput = React.createClass({
         };
       toPass.name = localStorage.getItem('name');
       toPass.text = this.state.userMessage;
-      console.log(toPass);
-
       actions.recieveMessage(toPass); //pass the state to the actions function nameChange when enter key hit.
       
     } else {
