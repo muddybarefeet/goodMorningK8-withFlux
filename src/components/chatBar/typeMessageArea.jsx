@@ -1,7 +1,6 @@
 var React = require('react');
 var AppStore = require('../../stores/AppStore.js');
-var actions = require('../../actions/AppActions');
-//var mainChatArea = require('./mainChatArea.jsx');
+var actions = require('../../actions/AppActions.js');
 
 /*function getAppState(){
   return AppStore.getData();
@@ -15,34 +14,19 @@ var messageInput = React.createClass({
     };
   },
 
-/*  _onChange: function(){
-  //set the new state of the component when triggered by the event listener in the store
-    this.setState(getAppState());
-    //set state will always trigger the render method
-  },*/
-
-/*  componentDidMount: function(){
-    //add event change listener to app store. tell the store to invoke the onChange function when change occurs
-    AppStore.addChangeListener(this._onChange);
-  },
-*/
-/*  componentWillUnmount: function(){
-    //removes event listener from the app store when the component removed from the page
-    AppStore.removeChangeListener(this._onChange);
-  },*/
-
   handleChange: function(e){
     if(e.key === 'Enter'){
       //send an action and update the stores
+      //function
+      this.refs.messageUser.getDOMNode().value = "";//EMPTIES TEXT AREA WHEN ENTER HIT
       var message = this.state.userMessage;
       var toPass = {
         name: null,
         text: null
-        };
+      };
       toPass.name = localStorage.getItem('name');
       toPass.text = this.state.userMessage;
-      actions.recieveMessage(toPass); //pass the state to the actions function nameChange when enter key hit.
-      
+      actions.sendMessage(toPass); //pass the state to the actions function nameChange when enter key hit.
     } else {
       var inputNode = this.refs.messageUser.getDOMNode();//this gets you a reference to the element that has the ref myInput
       var value = inputNode.value;
@@ -54,10 +38,10 @@ var messageInput = React.createClass({
     //put button on the screen again with the new state
     return (
       
-      <div>
-        <textarea ref="messageUser" className="messageInput" 
+      <div className="divMessStyle">
+        <textarea ref="messageUser" className="messageInput"
         onKeyUp={this.handleChange} 
-        /*style={{height: this.props.componentHeight}}*/></textarea> 
+        style={{height: this.props.componentHeight}}></textarea> 
       </div>
 
       );

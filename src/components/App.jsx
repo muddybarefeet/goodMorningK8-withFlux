@@ -9,6 +9,7 @@ var greet = require('./mainText/greeting.jsx');
 var name = require('./mainText/name.jsx');
 var nameButton = require('./settingsBar/nameButton.jsx');
 var chatBar = require('./chatBar/mainChatArea.jsx');
+var weatherIcon = require('./weather/weatherIcon.jsx');
 
 
 
@@ -53,6 +54,7 @@ var APP = React.createClass({
       
       <div>
 
+        <weatherIcon></weatherIcon>
         <chatBar onClick={this.handleClick.bind(this,"chatButton")}></chatBar>
 
         <div style={{marginTop:'300px', textAlign:'center'}}>

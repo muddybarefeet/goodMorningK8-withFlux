@@ -10,7 +10,7 @@ var _data = {
   name: "____________",
   messages: [],
   location: [],
-  weather: []
+  weather: null
 };
 
 var AppStore = merge(EventEmitter.prototype, {
@@ -23,9 +23,9 @@ var AppStore = merge(EventEmitter.prototype, {
     if(localStorage.hasOwnProperty('name')) {
       _data.name = localStorage.getItem('name'); //here I set data name prop to what is in local storage if there a name prop
     }
-    /*if(localStorage.hasOwnProperty('location')) {
-      _data.location = localStorage.getItem('location');
-    }*/
+    if(localStorage.hasOwnProperty('weather')) {
+      _data.weather = localStorage.getItem('weather');
+    }
   },
 
   emitChange: function(){
@@ -53,10 +53,15 @@ AppDispatcher.register( function (payload){ //'subscribes' to the dispatcher. St
     var name = action.author;
     var text = action.data;
     _data.messages.push([name,text]);
-  } /*if(action.actionType === "WEATHER") {
-    set temp and weather ID(store for images)
-  }*/
-
+  }
+  if(action.actionType === "WEATHER") {
+    /*var temp = action.temp;
+    var weatherId = action.weatherId;*/
+/*    var weatherObject = {'temp':temp,'weatherId':weatherId};*/
+    //localStorage.setItem('weather', [action.temp,action.weatherId]);
+    localStorage.setItem('weather', [action.temp, action.weatherId]);
+    console.log(localStorage.getItem('weather'));
+  }
 
   AppStore.emitChange();//emit change event once action recieved and the data updated
 

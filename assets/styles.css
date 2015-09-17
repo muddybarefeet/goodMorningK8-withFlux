@@ -1,4 +1,4 @@
-.mainText, .settingsBar, .chatBar {
+.mainText, .settingsBar, .chatBar, body {
   font-family: arial;
   color: white;
   overflow: hidden;
@@ -88,7 +88,7 @@
 }
 
 .yammerer {
-  margin-bottom: 10px;
+  height:30px;
 }
 
 .fa-comment-o {
@@ -105,10 +105,17 @@
 }
 
 .messageInput {
+  height: 175px;
+  padding: 0;
+}
+
+.divMessStyle {
   position: absolute;
   bottom: 0;
-  height: 100px;
   padding-top: 9px;
+  height: 174px;
+  background-color:rgb(0,0,0);
+  background-color:rgba(0,0,0,0.9);
 }
 
 .messagesRoll {
