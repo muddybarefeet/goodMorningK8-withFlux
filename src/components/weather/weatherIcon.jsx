@@ -31,23 +31,29 @@ var weatherIcon = React.createClass({
     //removes event listener from the app store when the component removed from the page
     AppStore.removeChangeListener(this._onChange);
   },*/
+  weatherIcon: function(id) {
+    var weatherObj = {
+
+      200: 'wi wi-storm-showers fa-2x',
+      300: 'wi wi-showers fa-2x',
+      500: 'wi wi-rain fa-2x',
+      600: 'wi wi-snow fa-2x',
+      700: 'wi wi-cloudy fa-2x',
+      800: 'wi wi-day-sunny fa-2x',
+      804: 'wi wi-day-cloudy fa-2x',
+      900: 'fa fa-exclamation-triangle fa-2x'
+    };
+
+    return weatherObj[id];
+  },
   
   render: function(){
-    //if and else statement here for different types of weather :)
-    //if cloudy 700's
-    //if sunny 800's
-    //if rainy cloudy 801-803
-    //if rain 300+500's
-    //if thunder 200's
-    //if snow 600's
-    //if ALERT 900's
-    
-    return (
-      
-      <div>
-        <i className="wi wi-night-sleet fa-2x"></i>
 
-        <span>{this.state.currentWeather}&deg;C</span>
+      return (
+     
+      <div>
+        <i className={this.weatherIcon(this.state.currentWeather[0])}></i>
+        <span className="celcius">{this.state.currentWeather[1]}&deg;C/</span><span className="farenheight">{this.state.currentWeather[2]}&deg;F</span>
       </div>
 
       );

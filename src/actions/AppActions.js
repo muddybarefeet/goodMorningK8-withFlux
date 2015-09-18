@@ -12,34 +12,48 @@ myDataRef.on('child_added', function(snapshot) {
 //instead let's chuck it directly in your init function
 var AppActions = {
 
+  getLocation: function() { //triggered by?
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(pos){
+        var strLat = pos.coords.latitude.toString();
+        var strLon = pos.coords.longitude.toString();
+        //this.getWeatherData(pos.coords.latitude,pos.coords.longitude);
+      });
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  },
+
   init: function() {
-    //so I'm saying request the weather, and then, take the err and data that I get back, and pass them to AppActions.recieveWeather
-    request('http://api.openweathermap.org/data/2.5/weather?lat=37.7749295&lon=-122.4194155', AppActions.recieveWeather);
+    return this.getLocation(); //array returned [lat,lon]
+  },
+
+  getWeatherData: function(lat,lon) {
+    console.log('lat for api',lat);
+    request("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon, AppActions.recieveWeather);
   },
   
-  //recieveWeather does whatever you want with the err and response you get back =)
   recieveWeather: function(err, res){
     if(!err) {
         var weatherObj = JSON.parse(res.body);
-        var id = weatherObj.weather[0].id;
-        var averageTempCelc = Math.round((weatherObj.main.temp)-273.15); //average temp converted from kelvin to celcius
-        //var averageTempFar = Math.round( ((((weatherObj.main.temp) - 273.15)* 1.8000)+32)  );
+        var id;
+        if(weatherObj.weather[0].id===804 || weatherObj.weather[0].id === 803) {
+          id = 804;
+        } else {
+          id = Math.floor(weatherObj.weather[0].id/100)*100;
+        }
+        var averageTempC = Math.round((weatherObj.main.temp)-273.15); //average temp converted from kelvin to celcius
+        var averageTempF = Math.round( ((((weatherObj.main.temp) - 273.15)* 1.8000)+32)  ); //kelvin to farenheight
         var exportObj = {
-          temp : averageTempCelc,
+          tempC : averageTempC,
+          tempF : averageTempF,
           weatherId : id
         };
-        console.log('weather running');
         AppActions.newWeather(exportObj);
+        console.log(exportObj);
       }else{
-        console.log('Failed to fetch weather: ', err)
+        console.log('Failed to fetch weather: ', err);
       }
-  },
-
-  exampleAction: function(text){ //sends object to dispatcher with details about it in an object
-    AppDispatcher.handleViewAction({
-      actionType: AppConstants.EXAMPLE_CONSTANT,
-      text: text + ' from Actions'
-    });
   },
 
   nameEnter: function(newName) {
@@ -60,28 +74,15 @@ var AppActions = {
   sendMessage: function(message){
     myDataRef.push(message);
   },
-
+  
   newWeather: function(weather) {
     AppDispatcher.handleWeatherAction({
       actionType: "WEATHER",
-      temp: weather.temp,
+      tempC: weather.tempC,
+      tempF: weather.tempF,
       weatherId: weather.weatherId
     });
   }
-
-/*
-  getLocation: function() { //triggered by?
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(pos){
-        console.log(pos);
-        var lat = pos.coords.latitude;
-        var lon = pos.coords.longitude;
-      });
-    } else {
-      console.log("Geolocation is not supported by this browser.");
-    }
-  }*/
-
 
 };
 

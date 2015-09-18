@@ -124,7 +124,18 @@
   padding-left: 10px;
 }
 
+/*-----------------------*/
+/*       WEATHER        */
+/*-----------------------*/
 
+.celcius {
+  font-size: 20px;
+  padding-left: 5px;
+}
+
+.farenheight {
+  font-size: 15px;
+}
 
 
 

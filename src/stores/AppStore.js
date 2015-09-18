@@ -9,8 +9,8 @@ var CHANGE_EVENT = 'change';
 var _data = {
   name: "____________",
   messages: [],
-  location: [],
-  weather: null
+  counter: 0,
+  weather: []
 };
 
 var AppStore = merge(EventEmitter.prototype, {
@@ -24,7 +24,9 @@ var AppStore = merge(EventEmitter.prototype, {
       _data.name = localStorage.getItem('name'); //here I set data name prop to what is in local storage if there a name prop
     }
     if(localStorage.hasOwnProperty('weather')) {
-      _data.weather = localStorage.getItem('weather');
+      _data.weather.push(localStorage.getItem('weatherId'));
+      _data.weather.push(localStorage.getItem('tempC'));
+      _data.weather.push(localStorage.getItem('tempF'));
     }
   },
 
@@ -50,17 +52,15 @@ AppDispatcher.register( function (payload){ //'subscribes' to the dispatcher. St
     _data.name = action.text;
   }
   if(action.actionType === "NEW_MESSAGE") {
+    _data.counter+=1;
     var name = action.author;
     var text = action.data;
     _data.messages.push([name,text]);
   }
   if(action.actionType === "WEATHER") {
-    /*var temp = action.temp;
-    var weatherId = action.weatherId;*/
-/*    var weatherObject = {'temp':temp,'weatherId':weatherId};*/
-    //localStorage.setItem('weather', [action.temp,action.weatherId]);
-    localStorage.setItem('weather', [action.temp, action.weatherId]);
-    console.log(localStorage.getItem('weather'));
+    localStorage.setItem('tempC', action.tempC);
+    localStorage.setItem('tempF', action.tempF);
+    localStorage.setItem('weatherId', action.weatherId);
   }
 
   AppStore.emitChange();//emit change event once action recieved and the data updated

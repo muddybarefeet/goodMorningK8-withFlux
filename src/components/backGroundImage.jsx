@@ -17,7 +17,7 @@ var backgroundImage = React.createClass({
     var daysPassed = Math.floor(timeDiff.asDays());//gives the hours passed since startTime
     //I want a new picture every day at midnight 
     //clever way to never get to the end of the images list!
-    imageNum = daysPassed%13;
+    imageNum = daysPassed%17;
     //return //what return?!
   },
 
