@@ -14,10 +14,13 @@ var AppActions = {
 
   getLocation: function() { //triggered by?
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(pos){
+      var that = this;
+      navigator.geolocation.getCurrentPosition(function(pos){ //anonymous function!
         var strLat = pos.coords.latitude.toString();
         var strLon = pos.coords.longitude.toString();
-        //this.getWeatherData(pos.coords.latitude,pos.coords.longitude);
+        //so 'this' is window
+        //so use that =)
+        that.getWeatherData(pos.coords.latitude,pos.coords.longitude);
       });
     } else {
       console.log("Geolocation is not supported by this browser.");
