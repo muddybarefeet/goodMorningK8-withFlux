@@ -62,11 +62,6 @@ var chatArea = React.createClass({
     var sum = counter-read;
 
     if(this.state.isSelected === true) {
-      //trigger to set the Storage??
-      
-      console.log('counter open:',counter);
-      console.log('read open:',read);
-
       return (
         
         <div className="chatBar">
@@ -84,19 +79,15 @@ var chatArea = React.createClass({
     } else if(this.state.isSelected === false && read < counter){ 
       return (
         <div>
-          <i className="fa fa-comment-o fa-2x red" onClick={this.clickOn}></i>
+          <i className="fa fa-comments-o fa-2x red" onClick={this.clickOn}></i>
         </div> 
       );
 
     } else if (this.state.isSelected === false){
 
-      console.log('last render working');
-      console.log('counter:',counter);
-      console.log('read:',read);
-
       return (
         <div>
-          <i className="fa fa-comment-o fa-2x" onClick={this.clickOn}></i>
+          <i className="fa fa-comments-o fa-2x" onClick={this.clickOn}></i>
         </div> 
       );
 

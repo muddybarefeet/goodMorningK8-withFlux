@@ -54,9 +54,10 @@ var firebaseMessages = React.createClass({
       var name = element[0];
       var message = element[1];
       var diff = that.props.unread;
-      console.log('this the the diff:',diff);
+
       if(diff > 0) {
-       if(index > that.props.readMess) {
+       var toRemFrom = that.props.readMess-diff;
+       if(index > toRemFrom) {
           return (
             <li key={index} className="redFont">{name+":"+" "+message}</li> 
           );

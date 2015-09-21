@@ -1,5 +1,6 @@
 .mainText, .settingsBar, .chatBar, body {
   font-family: arial;
+  text-shadow: -1px 0 #4C4C4C, 0 1px #4C4C4C,1px 0 #4C4C4C, 0 -1px #4C4C4C;
   color: white;
   overflow: hidden;
 }
@@ -8,9 +9,14 @@
 /* MAIN TEXT AREA STYLES */
 /*-----------------------*/
 
+.mainHello {
+  margin-top:230px;
+  text-align:center;
+}
+
 .mainText {
   font-weight: bold;
-  font-size: 90px;
+  font-size: 140px;
 }
 
 .greeting {
@@ -54,10 +60,11 @@
   border-bottom-right-radius:20px;
 }
 
-.fa-cogs:hover, .fa-comment-o:hover {
+.fa-cogs:hover, .fa-comments-o:hover {
   background-color:rgb(255,255,255);
   background-color:rgba(255,255,255,0.7);
   color: black;
+  text-shadow:none;
 }
 
 .nameInputArea, .messageInput {
@@ -91,7 +98,7 @@
   height:30px;
 }
 
-.fa-comment-o {
+.fa-comments-o {
   color: white;
   position:absolute;
   top:0;
@@ -137,12 +144,12 @@
 /*-----------------------*/
 
 .celcius {
-  font-size: 20px;
+  font-size: 25px;
   padding-left: 5px;
 }
 
 .farenheight {
-  font-size: 15px;
+  font-size: 20px;
 }
 
 

@@ -57,7 +57,7 @@ var APP = React.createClass({
         <weatherIcon></weatherIcon>
         <chatBar onClick={this.handleClick.bind(this,"chatButton")}></chatBar>
 
-        <div style={{marginTop:'300px', textAlign:'center'}}>
+        <div className="mainHello">
            <backgroundImage></backgroundImage>
            <clock></clock>
            <greet></greet>
