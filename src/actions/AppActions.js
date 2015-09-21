@@ -14,10 +14,11 @@ var AppActions = {
 
   getLocation: function() { //triggered by?
     if (navigator.geolocation) {
+      var that = this;
       navigator.geolocation.getCurrentPosition(function(pos){
         var strLat = pos.coords.latitude.toString();
         var strLon = pos.coords.longitude.toString();
-        //this.getWeatherData(pos.coords.latitude,pos.coords.longitude);
+        that.getWeatherData(pos.coords.latitude,pos.coords.longitude);
       });
     } else {
       console.log("Geolocation is not supported by this browser.");
@@ -29,7 +30,6 @@ var AppActions = {
   },
 
   getWeatherData: function(lat,lon) {
-    console.log('lat for api',lat);
     request("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon, AppActions.recieveWeather);
   },
   
@@ -50,7 +50,6 @@ var AppActions = {
           weatherId : id
         };
         AppActions.newWeather(exportObj);
-        console.log(exportObj);
       }else{
         console.log('Failed to fetch weather: ', err);
       }
@@ -81,6 +80,13 @@ var AppActions = {
       tempC: weather.tempC,
       tempF: weather.tempF,
       weatherId: weather.weatherId
+    });
+  },
+
+  localStorageSet: function(data) {
+    AppDispatcher.handleStorageAction({
+      actionType: "MESSAGES_COUNT",
+      number: data
     });
   }
 

@@ -2,6 +2,7 @@ var React = require('react');
 var AppStore = require('../../stores/AppStore.js');
 var actions = require('../../actions/AppActions');
 var typeMessageArea = require('./typeMessageArea.jsx');
+//var mainChat = require('./mainChatArea.jsx');
 
 function getAppState(){
   var data = AppStore.getData().messages;
@@ -48,17 +49,32 @@ var firebaseMessages = React.createClass({
   render: function(){ //render functio 
   
   //variable which returns a list item for each array in my array of messages
-    var renderedMessages = this.state.messages.map(function(element, index){
+    var that = this;
+    var renderedMessages = this.state.messages.map(function(element, index, array){
       var name = element[0];
       var message = element[1];
-      return (
-        <li key={index}>{name+":"+" "+message}</li> 
-      );
-    });
+      var diff = that.props.unread;
+      console.log('this the the diff:',diff);
+      if(diff > 0) {
+       if(index > that.props.readMess) {
+          return (
+            <li key={index} className="redFont">{name+":"+" "+message}</li> 
+          );
+        } else {
+          return (
+            <li key={index} >{name+":"+" "+message}</li> 
+          );
+        }
+      } else {
+        return (
+            <li key={index} >{name+":"+" "+message}</li> 
+        );
+      }
+    }/*.bind(this)*/);
 
     return ( // render the messages in the ul 
 
-      <ul ref="messageScroll" style={{height: this.state.componentHeight}} className="messagesRoll" >{renderedMessages}</ul> 
+      <ul ref="messageScroll" className="messagesRoll" style={{height: this.state.componentHeight}} >{renderedMessages}</ul> 
 
     );
 

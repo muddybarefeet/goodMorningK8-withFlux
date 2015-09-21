@@ -28,6 +28,12 @@ var AppStore = merge(EventEmitter.prototype, {
       _data.weather.push(localStorage.getItem('tempC'));
       _data.weather.push(localStorage.getItem('tempF'));
     }
+    if(localStorage.hasOwnProperty('counter')) {
+      _data.counter = localStorage.getItem('counter');
+    }
+   /* if(localStorage.hasOwnProperty('readMessages')) {
+       _data.readMessages = localStorage.getItem('readMessages');
+    }*/
   },
 
   emitChange: function(){
@@ -52,15 +58,18 @@ AppDispatcher.register( function (payload){ //'subscribes' to the dispatcher. St
     _data.name = action.text;
   }
   if(action.actionType === "NEW_MESSAGE") {
-    _data.counter+=1;
     var name = action.author;
     var text = action.data;
     _data.messages.push([name,text]);
+    _data.counter++;
   }
   if(action.actionType === "WEATHER") {
     localStorage.setItem('tempC', action.tempC);
     localStorage.setItem('tempF', action.tempF);
     localStorage.setItem('weatherId', action.weatherId);
+  }
+  if(action.actionType === "MESSAGES_COUNT") {
+    localStorage.setItem('readMessages', action.number);
   }
 
   AppStore.emitChange();//emit change event once action recieved and the data updated

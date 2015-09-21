@@ -30,6 +30,13 @@ var AppDispatcher = copyProperties(new Dispatcher(), {
       source: 'WEATHER_ACTION',
       action: action
     });
+  },
+
+  handleStorageAction: function(action) {
+    this.dispatch({
+      source: 'STORAGE_ACTION',
+      action: action
+    });
   }
 
 });
