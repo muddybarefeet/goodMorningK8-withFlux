@@ -28,9 +28,6 @@ var AppStore = merge(EventEmitter.prototype, {
       _data.weather.push(localStorage.getItem('tempC'));
       _data.weather.push(localStorage.getItem('tempF'));
     }
-   /* if(localStorage.hasOwnProperty('counter')) {
-      _data.counter = localStorage.getItem('counter');
-    }*/
   },
 
   emitChange: function(){
