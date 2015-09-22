@@ -15,9 +15,11 @@ var AppActions = {
   getLocation: function() { //triggered by?
     if (navigator.geolocation) {
       var that = this;
+
       navigator.geolocation.getCurrentPosition(function(pos){
         var strLat = pos.coords.latitude.toString();
         var strLon = pos.coords.longitude.toString();
+
         that.getWeatherData(pos.coords.latitude,pos.coords.longitude);
       });
     } else {
