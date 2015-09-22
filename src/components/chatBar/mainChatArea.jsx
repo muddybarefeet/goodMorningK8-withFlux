@@ -66,7 +66,7 @@ var chatArea = React.createClass({
         
         <div className="chatBar">
           <div onClick={this.offClick}>
-            <i className="fa fa-comment-o fa-2x"></i>
+            <i className="fa fa-comments-o fa-2x"></i>
           </div>
           <h2 ref="chatHead" className="yammerer header">Yammerer</h2>
           <firebaseMessages unread={sum} readMess={read}></firebaseMessages>

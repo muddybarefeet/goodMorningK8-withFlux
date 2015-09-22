@@ -55,7 +55,9 @@ AppDispatcher.register( function (payload){ //'subscribes' to the dispatcher. St
     var name = action.author;
     var text = action.data;
     _data.messages.push([name,text]);
-    _data.counter++;
+    if(name !== _data.name) {
+      _data.counter++;
+    }
   }
   if(action.actionType === "WEATHER") {
     localStorage.setItem('tempC', action.tempC);
