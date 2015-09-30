@@ -2,10 +2,6 @@ var React = require('react');
 var AppStore = require('../../stores/AppStore.js');
 var actions = require('../../actions/AppActions.js');
 
-/*function getAppState(){
-  return AppStore.getData();
-}*/
-
 var messageInput = React.createClass({
 
   getInitialState: function(){//default state for comonent (from store)

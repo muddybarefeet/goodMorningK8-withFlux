@@ -7,10 +7,9 @@ var backgroundImage = require('./backGroundImage.jsx');
 var clock = require('./mainText/clock.jsx');
 var greet = require('./mainText/greeting.jsx');
 var name = require('./mainText/name.jsx');
-var nameButton = require('./settingsBar/nameButton.jsx');
+var mainCalendarArea = require('./calendarBar/mainCalendarArea.jsx');
 var chatBar = require('./chatBar/mainChatArea.jsx');
 var weatherIcon = require('./weather/weatherIcon.jsx');
-
 
 
 function getAppState(){
@@ -40,7 +39,7 @@ var APP = React.createClass({
 
   handleClick: function(args){
 
-    if(args === 'nameButton' || args === 'chatButton') {
+    if(args === 'mainCalendarArea' || args === 'chatButton') {
       this.setState({
         isSelected: true
       });
@@ -64,7 +63,7 @@ var APP = React.createClass({
            <name></name>
         </div>
 
-        <nameButton onClick={this.handleClick.bind(this,"nameButton")}></nameButton>
+        <mainCalendarArea onClick={this.handleClick.bind(this,"mainCalendarArea")}></mainCalendarArea>
 
       </div>
 

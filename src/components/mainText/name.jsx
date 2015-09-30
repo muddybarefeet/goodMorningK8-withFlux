@@ -26,26 +26,12 @@ var Name = React.createClass({
     //removes event listener from the app store when the component removed from the page
     AppStore.removeChangeListener(this._onChange);
   },
-/*
-  handleClick: function(args){
-
-    if(args === 'buttonLeft') {
-      AppActions.leftSide(); //trigger action
-    } else if(args === 'buttonMiddle') {
-      AppActions.middle();
-    } else if(args === 'buttonRight') {
-      AppActions.rightSide();
-    }
-
-  },*/
   
   render: function(){
     //put button on the screen again with the new state
     return (
-      
-      <div className="mainText greeting">{this.state.currentInput}</div>
-      
-      );
+      <div className="mainText greeting name">{this.state.currentInput+"!"}</div>
+    );
   },
 });
 

@@ -10,12 +10,9 @@ var Clock = React.createClass({
   getTime : function() {
     hours = new Date().getHours().toString();
     var mins = new Date().getMinutes().toString();
-
     hours = hours.length===1 ? '0'+hours : hours;
     mins = mins.length===1 ? '0'+mins : mins;
-    
     time = hours + ':' + mins;
-
     return time;
   },
 

@@ -37,6 +37,20 @@ var AppDispatcher = copyProperties(new Dispatcher(), {
       source: 'STORAGE_ACTION',
       action: action
     });
+  },
+
+  handleGoogleAPIAction: function(action) {
+    this.dispatch({
+      source: 'GOOGLE_API',
+      action: action
+    });
+  },
+
+  handleServerImage: function(action) {
+    this.dispatch({
+      source: 'DAY_IMAGE',
+      action: action
+    });
   }
 
 });

@@ -20,7 +20,6 @@ var firebaseMessages = React.createClass({
 
   _onChange: function(){
   //set the new state of the component when triggered by the event listener in the store
-    console.log('change event triggered');
     var newMessages = getAppState();
     this.setState({
       messages: getAppState(),
@@ -40,7 +39,6 @@ var firebaseMessages = React.createClass({
     window.removeEventListener('resize', this._onChange);
   },
 
-
   componentDidUpdate: function() {
     var node = this.refs.messageScroll.getDOMNode();
     node.scrollTop = node.scrollHeight;
@@ -49,37 +47,36 @@ var firebaseMessages = React.createClass({
   render: function(){ //render functio 
   
   //variable which returns a list item for each array in my array of messages
-    var that = this;
-    var renderedMessages = this.state.messages.map(function(element, index, array){
-      var name = element[0];
-      var message = element[1];
-      var diff = that.props.unread;
-      console.log('diff:',diff);
+      var that = this;
+      var msgsToDisplay = this.state.messages.length !== 0 ? this.state.messages : [['Currently out gathering messages, I will be with you shortly!']];
 
-      if(diff > 0) {
-       var toRemFrom = that.state.messages.length-(diff+1);
-       if(index > toRemFrom) {
-        console.log('red messaeges needed');
-          return (
-            <li key={index} className="redFont">{name+":"+" "+message}</li> 
-          );
+      var renderedMessages = msgsToDisplay.map(function(element, index, array){
+        var diff = that.props.unread;
+
+        if(diff > 0) {
+          var toRemFrom = that.state.messages.length-(diff+1);
+          if(index > toRemFrom) {
+            return (
+              <li key={index} className="redFont">{element}</li> 
+            );
+          } else {
+            return (
+              <li key={index} >{element}</li> 
+            );
+          }
         } else {
           return (
-            <li key={index} >{name+":"+" "+message}</li> 
+              <li key={index} >{element}</li> 
           );
         }
-      } else {
-        return (
-            <li key={index} >{name+":"+" "+message}</li> 
-        );
-      }
-    }/*.bind(this)*/);
+      }/*.bind(this)*/);
 
-    return ( // render the messages in the ul 
+        return ( // render the messages in the ul 
 
-      <ul ref="messageScroll" className="messagesRoll" style={{height: this.state.componentHeight}} >{renderedMessages}</ul> 
+          <ul ref="messageScroll" className="messagesRoll messageFormat" style={{height: this.state.componentHeight}} >{renderedMessages}</ul> 
 
-    );
+        ); 
+  
 
   }
 

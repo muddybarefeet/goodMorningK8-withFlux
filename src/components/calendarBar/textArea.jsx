@@ -1,4 +1,4 @@
-//where I will make a bar for the user to put their name so it can go in the good morning part
+/*//where I will make a bar for the user to put their name so it can go in the good morning part
 
 var React = require('react');
 var actions = require('../../actions/AppActions');
@@ -22,7 +22,6 @@ var nameInput = React.createClass({
       var inputNode = this.refs.myInput.getDOMNode();//this gets you a reference to the element that has the ref myInput
       var value = inputNode.value;
       this.setState({userInput: value});
-
     }
 
   },
@@ -38,4 +37,4 @@ var nameInput = React.createClass({
 
 });
 
-module.exports = nameInput;
+module.exports = nameInput;*/
