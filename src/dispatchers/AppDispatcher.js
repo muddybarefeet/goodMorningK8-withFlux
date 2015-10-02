@@ -25,9 +25,9 @@ var AppDispatcher = copyProperties(new Dispatcher(), {
     });
   },
 
-  handleWeatherAction: function(action) {
+  handleServerWeather: function(action) {
     this.dispatch({
-      source: 'WEATHER_ACTION',
+      source: 'WEATHER',
       action: action
     });
   },

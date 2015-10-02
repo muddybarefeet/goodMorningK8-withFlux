@@ -48,10 +48,7 @@ var AppStore = merge(EventEmitter.prototype, {
 
 AppDispatcher.register( function (payload){ //'subscribes' to the dispatcher. Store wants to know if it does anything. Payload 
   var action = payload.action;//payload is the object of data coming from dispactcher //action is the object passed from the actions file
-  if(action.actionType === "INSERTED_NAME") {
-    localStorage.setItem('name', action.text);
-    _data.name = action.text;
-  }
+
   if(action.actionType === "NEW_MESSAGE") {
     var name = action.author;
     var text = action.data;
@@ -59,14 +56,6 @@ AppDispatcher.register( function (payload){ //'subscribes' to the dispatcher. St
     if(name !== _data.name) {
       _data.counter++;
     }
-  }
-  if(action.actionType === "WEATHER") {
-    localStorage.setItem('tempC', action.tempC);
-    localStorage.setItem('tempF', action.tempF);
-    localStorage.setItem('weatherId', action.weatherId);
-    _data.weather.push(localStorage.getItem('weatherId'));
-    _data.weather.push(localStorage.getItem('tempC'));
-    _data.weather.push(localStorage.getItem('tempF'));
   }
   if(action.actionType === "MESSAGES_COUNT") {
     localStorage.setItem('readMessages', action.number);
@@ -80,6 +69,9 @@ AppDispatcher.register( function (payload){ //'subscribes' to the dispatcher. St
   if(action.actionType === 'DAY_IMAGE') {
     var imageNum = action.num;
     _data.backGImg = imageNum;
+  }
+  if(action.actionType === 'WEATHER') {
+    _data.weather = [action.id,action.tempC,action.tempF];
   }
 
   AppStore.emitChange();//emit change event once action recieved and the data updated

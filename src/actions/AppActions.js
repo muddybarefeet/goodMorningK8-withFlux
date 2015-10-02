@@ -22,14 +22,8 @@ var checkAuth = function () {
 //instead let's chuck it directly in your init function
 var AppActions = {
 
-  strLat:null,
-  strLon:null,
   CLIENT_ID:'525119639464-ec7ul4h2mpceqp59r24rbd0j64t56ovl.apps.googleusercontent.com',
   SCOPES: ["https://www.googleapis.com/auth/calendar.readonly"],
-
-  init: function() {
-    return this.getLocation();
-  },
 
   handleAuthClick: function (event) { //send off thing to google to authaurze
     gapi.auth.authorize(
@@ -101,47 +95,6 @@ var AppActions = {
       actionType: "CALENDAR_REQUEST",
       text: calEntry
     });
-  },
-
-  getLocation: function() {
-    if (navigator.geolocation) {
-      var that = this;
-
-      navigator.geolocation.getCurrentPosition(function(pos){
-        strLat = pos.coords.latitude.toString();
-        strLon = pos.coords.longitude.toString();
-        that.getWeatherData(pos.coords.latitude,pos.coords.longitude);
-      });
-    } else {
-      console.log("Geolocation is not supported by this browser.");
-    }
-  },
-
-  getWeatherData: function(lat,lon) {
-    request("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon, this.recieveWeather);
-  },
-  
-  recieveWeather: function(err, res){
-    var that = this;
-    if(!err) {
-        var weatherObj = JSON.parse(res.body);
-        var id;
-        if(weatherObj.weather[0].id===804 || weatherObj.weather[0].id === 803) {
-          id = 804;
-        } else {
-          id = Math.floor(weatherObj.weather[0].id/100)*100;
-        }
-        var averageTempC = Math.round((weatherObj.main.temp)-273.15); //average temp converted from kelvin to celcius
-        var averageTempF = Math.round( ((((weatherObj.main.temp) - 273.15)* 1.8000)+32)  ); //kelvin to farenheight
-        var exportObj = {
-          tempC : averageTempC,
-          tempF : averageTempF,
-          weatherId : id
-        };
-        AppActions.newWeather(exportObj);
-      }else{
-        console.log('Failed to fetch weather: ', err);
-      }
   },
 
   nameEnter: function(newName) {
