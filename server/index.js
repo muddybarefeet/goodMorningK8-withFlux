@@ -11,10 +11,6 @@ app.use(function(req, res, next) {
 
 app.use('/public', express.static(__dirname + '/public'));
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
-
 app.get('/api/imageNum', function(req, res) {
   var imgNo = getImage();
   res.type('application/json');
@@ -26,7 +22,7 @@ app.get('/api/imageNum', function(req, res) {
 app.get('/api/weather', function(req, res) {
   var lat = req.query.lat;
   var lon = req.query.lon;
-  request("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon, function (error, response, body) {
+  request("http://api.forecast.io/forecast/2f8efe741324bd670c91c4cd593a4062/"+lat+","+lon+'?units=si', function (error, response, body) {
     //Check for error
     if(error){
         return console.log('Error:', error);
@@ -36,12 +32,13 @@ app.get('/api/weather', function(req, res) {
         return console.log('Invalid Status Code Returned:', response.statusCode);
     }
     //All is good. Print the body
-    var weatherObj = JSON.parse(body);
-    var weatherId = weatherObj.weather[0].id;
-    var avTemp = weatherObj.main.temp;
+    var usefulData = JSON.parse(response.body);
+    var tempMax = usefulData.daily.data[0].temperatureMax;
+    var tempCurr = usefulData.currently.temperature;
     res.send ({
-      id:weatherId,
-      temp:avTemp
+      icon: usefulData.currently.icon,
+      currentTemp: tempCurr,
+      max: tempMax
     });
   });
 });
@@ -53,7 +50,3 @@ var server = app.listen(3000, function () {
 
   console.log('Example app listening at', host, port);
 });
-
-/* getWeatherData: function(lat,lon) {
-    request("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon, this.recieveWeather);
-  },*/

@@ -75,11 +75,9 @@ var AppActions = {
             var today = new Date();
             var inAWeek = moment(today).add(7, 'days');
             inAWeek = inAWeek._d;
-            console.log('hap:',new Date(happening));
-            console.log('inAWeek:',inAWeek);
             if(moment(happening).isBefore(inAWeek) === true) { //show those within a weeks time!
               happening = moment(happening).calendar();
-              calNote[i] = [happening+':'+"\n"+what.summary];
+              calNote[i] = [happening+':  '+what.summary];
             }
         }
         AppActions.calendarReq(calNote);

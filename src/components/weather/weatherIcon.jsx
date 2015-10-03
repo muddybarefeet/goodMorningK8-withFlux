@@ -3,9 +3,6 @@ var React = require('react');
 var AppStore = require('../../stores/AppStore');
 var AppActions = require('../../actions/AppActions');//execute file and then store it in the variable(importing code to use)
 
-/*function getAppState(){
-  return AppStore.getData().weather; //return object
-}*/
 
 var weatherIcon = React.createClass({
   
@@ -33,19 +30,19 @@ var weatherIcon = React.createClass({
   },
 
   weatherIcon: function(id) {
-    var weatherObj = {
-
-      200: 'wi wi-storm-showers fa-2x',
-      300: 'wi wi-showers fa-2x',
-      500: 'wi wi-rain fa-2x',
-      600: 'wi wi-snow fa-2x',
-      700: 'wi wi-cloudy fa-2x',
-      800: 'wi wi-day-sunny fa-2x',
-      804: 'wi wi-day-cloudy fa-2x',
-      900: 'fa fa-exclamation-triangle fa-2x'
+    var forecastOptions = {
+      clear_day: "wi-day-sunny",
+      clear_night: "wi-night-clear",
+      rain: "wi-rain",
+      snow: "wi-snow",
+      sleet: "wi-sleet",
+      wind: "wi-strong-wind",
+      fog: "wi-fog",
+      cloudy: "wi-cloudy",
+      "partly-cloudy-day": "wi-day-cloudy",
+      "partly-cloudy-night": "wi-night-cloudy",
     };
-
-    return weatherObj[id];
+    return forecastOptions[id];
   },
   
   render: function(){
@@ -53,8 +50,8 @@ var weatherIcon = React.createClass({
       return (
      
       <div>
-        <i className={this.weatherIcon(this.state.currentWeather[0])}></i>
-        <span className="celcius">{this.state.currentWeather[1]}&deg;C/</span><span className="farenheight">{this.state.currentWeather[2]}&deg;F</span>
+        <i className={"wi "+this.weatherIcon(this.state.currentWeather[0])+" fa-2x"}></i>
+        <span className="currentT">{this.state.currentWeather[1]}/</span><span className="maxT">{this.state.currentWeather[2]}&deg;C</span>
       </div>
 
       );

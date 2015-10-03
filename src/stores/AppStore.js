@@ -71,7 +71,7 @@ AppDispatcher.register( function (payload){ //'subscribes' to the dispatcher. St
     _data.backGImg = imageNum;
   }
   if(action.actionType === 'WEATHER') {
-    _data.weather = [action.id,action.tempC,action.tempF];
+    _data.weather = [action.icon,action.tempCurr,action.tempMax];
   }
 
   AppStore.emitChange();//emit change event once action recieved and the data updated

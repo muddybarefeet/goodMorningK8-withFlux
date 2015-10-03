@@ -14,9 +14,7 @@ var ServerActions = {
   },
   
   getImageNum: function() {
-
     request("http://localhost:3000/api/imageNum", this.recieveImageNum);
-
   },
 
   recieveImageNum: function(err, resp) {
@@ -40,9 +38,9 @@ var ServerActions = {
     if (navigator.geolocation) {
       var that = this;
       navigator.geolocation.getCurrentPosition(function(pos){
-        strLat = pos.coords.latitude.toString();
-        strLon = pos.coords.longitude.toString();
-        that.getWeatherData(strLat,strLon);
+        lat = pos.coords.latitude;
+        lon = pos.coords.longitude;
+        that.getWeatherData(lat,lon);
       });
     } else {
       console.log("Geolocation is not supported by this browser.");
@@ -50,7 +48,7 @@ var ServerActions = {
   },
 
   getWeatherData: function(lat,lon) {
-    request('http://localhost:3000/api/weather?lat=37.7833&lon=122.4167', this.recieveWeather);
+    request('http://localhost:3000/api/weather?lat='+lat+'&lon='+lon, this.recieveWeather);
   },
 
   recieveWeather: function(err,resp) {
@@ -63,33 +61,22 @@ var ServerActions = {
   },
 
   formatWeather: function(weatherObj) {
-    var id = weatherObj.id;
-    if(id===804 || id === 803) {
-      id = 804;
-    } else {
-      id = Math.floor(id/100)*100;
-    }
-
-    var temp = weatherObj.temp;
-    var averageTempC = Math.round((temp)-273.15); //average temp converted from kelvin to celcius
-    var averageTempF = Math.round( ((((temp) - 273.15)* 1.8000)+32)  ); //kelvin to farenheight
-
-
+    var tempCurr = weatherObj.currentTemp;
+    var tempMax = weatherObj.max;
     var exportObj = {
-      tempC : averageTempC,
-      tempF : averageTempF,
-      weatherId : id
+      icon: weatherObj.icon,
+      tempCurr : Math.round(tempCurr),
+      tempMax : Math.round(tempMax)
     };
-
     this.sendWeatherReq(exportObj);
   },
 
   sendWeatherReq: function(weatherObj) {
     AppDispatcher.handleServerWeather({
       actionType: "WEATHER",
-      id: weatherObj.weatherId,
-      tempC: weatherObj.tempC,
-      tempF: weatherObj.tempF
+      icon: weatherObj.icon,
+      tempMax: weatherObj.tempMax,
+      tempCurr: weatherObj.tempCurr
     });
   }
 

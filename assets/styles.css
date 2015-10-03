@@ -185,17 +185,22 @@ li {
   color: yellow;
 }
 
+
 /*-----------------------*/
-/*       WEATHER        */
+/*       WEATHER         */
 /*-----------------------*/
 
-.celcius {
-  font-size: 25px;
-  padding-left: 5px;
+.wi {
+  margin-top: 4px;
 }
 
-.farenheight {
-  font-size: 20px;
+.currentT {
+  font-size: 25px;
+  margin-left: 5px;
+}
+
+.maxT {
+  font-size: 18px;
 }
 
 
