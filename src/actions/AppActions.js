@@ -48,7 +48,7 @@ var AppActions = {
 
   listUpcomingEvents: function() {
     var request = gapi.client.calendar.events.list({
-      'calendarId': 'primary',
+      'calendarId': 'hackreactor.com_u2ghnt6agek62ohdjfhcafssi4@group.calendar.google.com',
       'timeMin': (new Date()).toISOString(),
       'showDeleted': false,
       'singleEvents': true,
