@@ -1,7 +1,10 @@
 var express = require('express');
-var app = express();
-var getImage = require('./helpers/getImageNum.js');
 var request = require('request');
+var app = express();
+
+var getImage = require('./helpers/getImageNum.js');
+
+var db = require('./services/db/index.js'); //trigger the knex database
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -22,10 +25,10 @@ app.get('/api/imageNum', function(req, res) {
 app.get('/api/weather', function(req, res) {
   var lat = req.query.lat;
   var lon = req.query.lon;
-  request("http://api.forecast.io/forecast/2f8efe741324bd670c91c4cd593a4062/"+lat+","+lon+'?units=si', function (error, response, body) {
+  request("https://api.forecast.io/forecast/2f8efe741324bd670c91c4cd593a4062/"+lat+","+lon+'?units=si', function (error, response, body) {
     //Check for error
     if(error){
-        return console.log('Error:', error);
+        return console.log('Error weather:', error);
     }
     //Check for right status code
     if(response.statusCode !== 200){
@@ -43,6 +46,23 @@ app.get('/api/weather', function(req, res) {
   });
 });
 
+app.get('/messages/:userEmail', function(req, res) {
+  var email = req.params.userEmail;
+  db.messages.getMessages(email)
+  .then(function(data) {
+    return res.send(data);
+  });
+});
+
+//post things to database
+app.post('/messages', function(req, res) {
+  //var packet = req.body; FIX ME!!! middlewear?? body-parser google
+  //to be added to the client when sending POST
+  db.messages.addMessages(packet.message, packet.from, packet.to)
+  .then(function(data) {
+    return res.send(data);
+  });
+});
 
 var server = app.listen(3000, function () {
   var host = server.address().address;
