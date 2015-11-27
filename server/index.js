@@ -3,7 +3,7 @@ var request = require('request');
 var app = express();
 
 var getImage = require('./helpers/getImageNum.js');
-var db = require('./services/db/index.js'); //trigger the knex database
+
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -42,24 +42,6 @@ app.get('/api/weather', function(req, res) {
       currentTemp: tempCurr,
       max: tempMax
     });
-  });
-});
-
-app.get('/messages/:userEmail', function(req, res) {
-  var email = req.params.userEmail;
-  db.messages.getMessages(email)
-  .then(function(data) {
-    return res.send(data);
-  });
-});
-
-//post things to database
-app.post('/messages', function(req, res) {
-  //var packet = req.body; FIX ME!!! middlewear?? body-parser google
-  //to be added to the client when sending POST
-  db.messages.addMessages(packet.message, packet.from, packet.to)
-  .then(function(data) {
-    return res.send(data);
   });
 });
 

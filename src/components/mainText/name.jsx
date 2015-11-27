@@ -5,14 +5,14 @@ var Name = React.createClass({
   
   getInitialState: function(){//default state for comonent (from store)
     return {
-      currentInput : AppStore.getData().name
+      currentInput : 'Anna'
     };
   },
 
   _onChange: function(){
   //set the new state of the component when triggered by the event listener in the store
     this.setState({
-      currentInput : AppStore.getData().name
+      currentInput : 'Anna'
     });
     //set state will always trigger the render method
   },

@@ -28,11 +28,6 @@ componentDidMount: function(){
     AppStore.addChangeListener(this._onChange);
 },
 
-  /*componentWillUnmount: function(){
-    //removes event listener from the app store when the component removed from the page
-    AppStore.removeChangeListener(this._onChange);
-  },*/
-
   render: function(){
     var currentBackgroundNum = parseInt(this.state.currentBackground);
     return (

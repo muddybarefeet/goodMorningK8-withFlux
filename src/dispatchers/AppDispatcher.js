@@ -18,13 +18,6 @@ var AppDispatcher = copyProperties(new Dispatcher(), {
     });
   },
 
-  handleFirebaseAction: function(action) {
-    this.dispatch({
-      source: 'FIREBASE_ACTION',
-      action: action
-    });
-  },
-
   handleServerWeather: function(action) {
     this.dispatch({
       source: 'WEATHER',
@@ -39,12 +32,12 @@ var AppDispatcher = copyProperties(new Dispatcher(), {
     });
   },
 
-  handleGoogleAPIAction: function(action) {
-    this.dispatch({
-      source: 'GOOGLE_API',
-      action: action
-    });
-  },
+  // handleGoogleAPIAction: function(action) {
+  //   this.dispatch({
+  //     source: 'GOOGLE_API',
+  //     action: action
+  //   });
+  // },
 
   handleServerImage: function(action) {
     this.dispatch({

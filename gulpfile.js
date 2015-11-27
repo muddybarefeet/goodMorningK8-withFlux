@@ -18,7 +18,7 @@ gulp.task('browserify', function() {
         .pipe(source('bundle.js')) //.pipe is node thing. put pipe on a data source to format the data like array.map(). pip is stationary and data fed through it
         //create bundle.js and add the data to it and this will be a normal js file.
         .pipe(gulp.dest('./build/')) //gulp.dest once got bundle.js put it in the build folder
-        .pipe(connect.reload());  
+        .pipe(connect.reload());
 });
 
 gulp.task('connect', function(){
