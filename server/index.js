@@ -3,7 +3,6 @@ var request = require('request');
 var app = express();
 
 var getImage = require('./helpers/getImageNum.js');
-var db = require('./services/db/index.js'); //trigger the knex database
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

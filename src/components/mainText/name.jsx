@@ -5,14 +5,14 @@ var Name = React.createClass({
   
   getInitialState: function(){//default state for comonent (from store)
     return {
-      currentInput : 'Anna'
+      currentInput : AppStore.getData().name
     };
   },
 
   _onChange: function(){
   //set the new state of the component when triggered by the event listener in the store
     this.setState({
-      currentInput : 'Anna'
+      currentInput : AppStore.getData().name
     });
     //set state will always trigger the render method
   },
@@ -30,7 +30,9 @@ var Name = React.createClass({
   render: function(){
     //put button on the screen again with the new state
     return (
-      <div className="mainText greeting name">{this.state.currentInput+"!"}</div>
+      <div className="mainText greeting name">
+        <p contenteditable="true">{this.state.currentInput}</p>
+      </div>
     );
   },
 });
