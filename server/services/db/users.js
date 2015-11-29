@@ -17,7 +17,7 @@ module.exports = function(knex){
     })
     .then(function(data) {
       return data.map(function(row) {
-        return new Classes.User(row.id,row.email,row.user_name);
+        return new Classes.User(row.id,row.email,row.user_name, row.password);
       });
     });
 
@@ -32,9 +32,20 @@ module.exports = function(knex){
       return data.map(function(row) {
         return new Classes.User(row.id,row.email,row.user_name);
       });
+    });
+
+  };
+
+  methods.checkPassword = function (email, password) {
+    //find the user and check the passsword
+    return knex('users').where('email', email)
+    .then(function (data) {
+      console.log('USER DATA!',data);
+      return bcrypt.compareAsync(password, data[0].password);
     })
-    .catch(function(err){
-      console.log(err);
+    .then(function (res) {
+      console.log('RES!!!',res);
+      return {returnVal: res};
     });
 
   };

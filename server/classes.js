@@ -1,9 +1,10 @@
 var classes = {};
 
-var User = function(id, email, username){
+var User = function(id, email, username, password){
   this.id = id;
   this.email = email;
   this.username = username;
+  this.password = password;
 };
 
 var Message = function(text, time, from, to) {

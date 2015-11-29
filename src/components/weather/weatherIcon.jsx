@@ -46,7 +46,7 @@ var weatherIcon = React.createClass({
   },
   
   render: function(){
-
+// console.log('WEATHER', this.weatherIcon(this.state.currentWeather[0]));
       return (
      
       <div>

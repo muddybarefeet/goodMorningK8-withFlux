@@ -20,17 +20,17 @@
 /*-----------------------*/
 
 .mainHello {
-  margin-top:230px;
+  margin-top:195px;
   text-align:center;
 }
 
 .mainText {
   font-weight: bold;
-  font-size: 140px;
+  font-size: 100px;
 }
 
 .greeting {
-  font-size: 70px;
+  font-size: 50px;
 }
 
 .name {
