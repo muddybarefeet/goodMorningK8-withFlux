@@ -3,7 +3,9 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY UNIQUE NOT NULL,
   user_name VARCHAR(30) NOT NULL,
   email VARCHAR(200) UNIQUE NOT NULL,
-  password TEXT NOT NULL
+  password TEXT NOT NULL,
+  first_name TEXT NOT NULL,
+  last_name TEXT NOT NULL
 );
 
 CREATE TABLE messages (

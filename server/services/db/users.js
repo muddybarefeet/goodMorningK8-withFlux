@@ -6,7 +6,7 @@ var methods = {};
 
 module.exports = function(knex){
 
-  methods.create = function(email, username, password){
+  methods.create = function(email, username, password, firstName, lastName){
     
     return bcrypt.genSaltAsync(10)
     .then(function(salt) {
@@ -14,11 +14,11 @@ module.exports = function(knex){
     })
     .then(function(hash) {
       console.log('IN USERS',hash);
-      return knex.insert({email: email, user_name: username, password: hash}, '*').into('users');
+      return knex.insert({email: email, user_name: username, password: hash, first_name: firstName, last_name: lastName}, '*').into('users');
     })
     .then(function(data) {
       return data.map(function(row) {
-        return new Classes.User(row.id,row.email,row.user_name, row.password);
+        return new Classes.User(row.id,row.email,row.user_name, row.password, row.first_name, row.last_name);
       });
     })
     .catch(function (err) {

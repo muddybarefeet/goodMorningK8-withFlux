@@ -16,7 +16,7 @@ describe('database', function() {
 
   it('should be able to add a new user kate to the users table', function() {
 
-    return db.users.create('fine_filly@hotmail.com','kate','corsetsRock')
+    return db.users.create('fine_filly@hotmail.com','kate','corsetsRock', 'Kate', 'Rogers')
     .then(function(data) {
       expect(data.length).to.equal(1);
       expect(data[0].email).to.equal("fine_filly@hotmail.com");
@@ -27,7 +27,7 @@ describe('database', function() {
 
   it('should be able to add a new user rohan the users table', function() {
 
-    return db.users.create('sarith21@gmail.com','huggada1','imonlyfive')
+    return db.users.create('sarith21@gmail.com','huggada1','imonlyfive', 'Rohan', 'Pethiyagoda')
     .then(function(data) {
       //testing the return object not the database
       expect(data.length).to.equal(1);

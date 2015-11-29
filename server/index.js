@@ -53,7 +53,7 @@ app.get('/api/weather', function(req, res) {
 app.post('/api/users', function (req, res) {
 
   var packet = req.body;
-  db.users.create( packet.email, packet.username, packet.password)
+  db.users.create( packet.email, packet.username, packet.password, packet.firstName, packet.lastName)
   .then(function (data) {
     return res.status(200).json({message: 'Successfully added to the database'});
   })
@@ -95,6 +95,7 @@ app.post('/api/messages', function(req, res) {
 });
 
 //get all the messages to or from one user
+//WILL BE CHANGING TO USE JOT INFO
 app.get('/api/messages/:userEmail', function(req, res) {
 
   var email = req.params.userEmail;
@@ -114,7 +115,11 @@ app.post('/api/friendRequest', function (req, res) {
   db.friends.createRequest(req.body.sentFromEmail, req.body.sentToEmail)
   .then(function(data) {
     console.log('DATA FROM friends!', data);
-    return res.status(200).json({message: 'Friend Request Sent'});
+    if (data) {
+      return res.status(200).json({message: 'Friend Request Sent'});
+    } else {
+      return res.status(404).json({message: 'User not found'});
+    }
   })
   .catch(function (err) {
     res.status(500).json({message: 'Unable to send friend request'});
@@ -122,27 +127,15 @@ app.post('/api/friendRequest', function (req, res) {
 
 });
 
-// //allow users to accept a friend request
-// app.post('/api/acceptFriend', function (req, res) {
-
-//   db.friends.acceptRequest(req.body.sentFromEmail, req.body.sentToEmail)
-//   .then(function(data) {
-//     console.log('DATA FROM friends!', data);
-//     return res.status(200).json({message: 'Friend Request Sent'});
-//   })
-//   .catch(function (err) {
-//     res.status(500).json({message: 'Unable to send friend request'});
-//   });
-
-// });
-
 //button to check if you have any frined requests
+//WILL BE CHANGING TO USE JOT INFO
 app.get('/api/getNewFriends/:userEmail', function (req, res) {
 
   var email = req.params.userEmail;
-  db.friends.getNewReqest()
+  db.friends.getNewReqests(email)
   .then(function (data) {
     console.log('DATA IN SERVER', data);
+    return res.status(200).json({usersRequesting: data});
   })
   .catch(function (err) {
     res.status(500).json({message: 'Unable to find any friend requests'});

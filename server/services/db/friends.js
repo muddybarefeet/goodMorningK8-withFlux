@@ -31,26 +31,27 @@ module.exports = function(knex) {
 
   };
 
-  // methods.acceptRequest = function (emailFrom, emailTo) {
-
-  //   return knex.select('*').from('users').where('email', emailFrom).orWhere('email','=', emailTo)
-  //   .then(function (users) {
-
-  //   })
-
-  // };
-
   methods.getNewReqests = function (userEmail) {
 
     return knex.select('id').from('users').where('email', userEmail)
     .then(function (id) {
       console.log("USER ID IN GET REQ",id);
-      return knex.select('*').from('friends').where('request_received', id);
+      return knex.select('*').from('friends').where('request_received', id[0].id);
     })
     .then(function (returnedRows) {
       console.log('RETURNED ROWS', returnedRows);
-      //loop through the rows and format
-      //send to server
+      //get a list of all the people who have asked to be your friend
+     //JOIN TABLE!!!
+     return knex.from('users')
+     .innerJoin('friends', 'users.id', 'friends.request_sent')
+     .select('users.id', 'users.first_name', 'users.last_name', 'friends.request_sent');
+    })
+    .then(function (joinRows) {
+      console.log('JOIN ROWS!!!-------->', joinRows);
+      //loop through the array
+      return joinRows.map(function (row) {
+        return new Classes.FriendsGot(row.id, row.first_name, row.last_name);
+      });
     })
     .catch(function(err) {
       console.log('ERROR!!',err);
