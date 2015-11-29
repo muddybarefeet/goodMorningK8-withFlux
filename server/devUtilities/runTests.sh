@@ -1,5 +1,5 @@
 #!/bin/bash
-#run in bash mode . scriptToResetDatabase.sh 
+#run in bash mode . runTests.sh 
 
 #call the terminal command from this file to run the clear db file
 

@@ -55,10 +55,10 @@ app.post('/api/users', function (req, res) {
   var packet = req.body;
   db.users.create( packet.email, packet.username, packet.password)
   .then(function (data) {
-    res.status(200).json();
+    return res.status(200).json({message: 'Successfully added to the database'});
   })
   .catch(function (err) {
-    res.status(500).json();
+    res.status(500).json({message: 'Unable to add user'});
   });
 
 });
@@ -70,11 +70,26 @@ app.post('/api/checkPassword', function (req, res) {
   db.users.checkPassword(packet.email, packet.password)
   .then(function (data) {
     if (data) {
-      res.status(200).json({message: 'Correct password'});
+      return res.status(200).json({message: 'Correct password'});
     }
   })
   .catch(function (err) {
     res.status(403).json({message: 'Incorrect password'});
+  });
+
+});
+
+
+//post things to database
+app.post('/api/messages', function(req, res) {
+  var packet = req.body;
+  //to be added to the client when sending POST
+  db.messages.addMessage(packet.message, packet.from, packet.to)
+  .then(function(data) {
+    return res.send(data);
+  })
+  .catch(function (err) {
+    res.status(500).json({message: 'Unable to save message to the database'});
   });
 
 });
@@ -93,19 +108,48 @@ app.get('/api/messages/:userEmail', function(req, res) {
 
 });
 
-//post things to database
-app.post('/api/messages', function(req, res) {
-  var packet = req.body;
-  //to be added to the client when sending POST
-  db.messages.addMessage(packet.message, packet.from, packet.to)
+//allow users to add people to talk with
+app.post('/api/friendRequest', function (req, res) {
+
+  db.friends.createRequest(req.body.sentFromEmail, req.body.sentToEmail)
   .then(function(data) {
-    return res.send(data);
+    console.log('DATA FROM friends!', data);
+    return res.status(200).json({message: 'Friend Request Sent'});
   })
   .catch(function (err) {
-    res.status(500).json();
+    res.status(500).json({message: 'Unable to send friend request'});
   });
 
 });
+
+// //allow users to accept a friend request
+// app.post('/api/acceptFriend', function (req, res) {
+
+//   db.friends.acceptRequest(req.body.sentFromEmail, req.body.sentToEmail)
+//   .then(function(data) {
+//     console.log('DATA FROM friends!', data);
+//     return res.status(200).json({message: 'Friend Request Sent'});
+//   })
+//   .catch(function (err) {
+//     res.status(500).json({message: 'Unable to send friend request'});
+//   });
+
+// });
+
+//button to check if you have any frined requests
+app.get('/api/getNewFriends/:userEmail', function (req, res) {
+
+  var email = req.params.userEmail;
+  db.friends.getNewReqest()
+  .then(function (data) {
+    console.log('DATA IN SERVER', data);
+  })
+  .catch(function (err) {
+    res.status(500).json({message: 'Unable to find any friend requests'});
+  });
+
+});
+
 
 var server = app.listen(3000, function () {
   var host = server.address().address;

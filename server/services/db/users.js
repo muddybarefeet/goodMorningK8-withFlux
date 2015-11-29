@@ -13,12 +13,16 @@ module.exports = function(knex){
       return bcrypt.hashAsync(password, salt);
     })
     .then(function(hash) {
+      console.log('IN USERS',hash);
       return knex.insert({email: email, user_name: username, password: hash}, '*').into('users');
     })
     .then(function(data) {
       return data.map(function(row) {
         return new Classes.User(row.id,row.email,row.user_name, row.password);
       });
+    })
+    .catch(function (err) {
+      console.log(err);
     });
 
     //take a packet of data from the client and insert it into the database

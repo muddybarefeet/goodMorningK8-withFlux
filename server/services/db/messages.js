@@ -6,8 +6,7 @@ module.exports = function(knex) {
 
   methods.addMessage = function(message, from, to) {
     
-    return knex.insert({message: message, sent_from: from, sent_to: to}, '*')
-    .into('messages')
+    return knex.insert({message: message, sent_from: from, sent_to: to}, '*').into('messages')
     .then(function(data) {
       return data.map(function(row) {
         return new Classes.Message(row.message, row.created_at, row.sent_from, row.sent_to);
@@ -23,14 +22,11 @@ module.exports = function(knex) {
     .then(function(data) {
       var id = data[0].id;
       //use id to filter messages table
-      return knex.select('*')
-      .from('messages')
-      .where('sent_from','=', id)
-      .orWhere('sent_to','=',id)
-      .then(function(data) {
-        return data.map(function(row) {
-          return new Classes.Message(row.message, row.created_at, row.sent_from, row.sent_to);
-        });
+      return knex.select('*').from('messages').where('sent_from','=', id).orWhere('sent_to','=',id);
+    })
+    .then(function(data) {
+      return data.map(function(row) {
+        return new Classes.Message(row.message, row.created_at, row.sent_from, row.sent_to);
       });
     });
 
